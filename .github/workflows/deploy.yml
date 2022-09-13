@@ -1,0 +1,26 @@
+on: 
+  push:
+    branches:
+      - main
+      - develop
+
+name: Deploy website
+
+jobs:
+  deploy:
+    name: Deploy website
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout website
+        uses: actions/checkout@v2
+
+      - name: Execute deployment script
+        uses: rtCamp/action-deploy-wordpress@v3
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          WP_VERSION: 5.8
+
+      - name: Cleanup
+        if: ${{ always() }}
+        uses: rtCamp/action-cleanup@master
