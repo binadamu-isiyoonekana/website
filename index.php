@@ -1,2 +1,1 @@
-<?php
-  // silence is cool
+<?php echo 'Welcome to Sofair Foundation'; ?>
